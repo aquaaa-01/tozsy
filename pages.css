@@ -1,0 +1,304 @@
+/* ==========================================================================
+   Pages v3.0 — 页面构图
+   ==========================================================================
+   信息来源四分法（视觉必须明显区分）：
+   001 病历    —— 别人记录我     冷白打印纸
+   002 博客    —— 我记录自己     00年代个人博客页
+   003 VV      —— 我与别人交流   古早 IM 窗口
+   004 浏览器  —— 公开互联网     旧浏览器窗口
+   叙事场景    —— 记忆 / 当下     近黑全屏
+   档案桌      —— 我收着什么     冷灰桌面
+   ========================================================================== */
+
+/* ---------- 各页环境底色 ---------- */
+.page--medical, .page--blog, .page--vv, .page--web, .page--desk {
+  background: transparent;   /* 桌面壁纸（#app 层）透出，窗口只是桌面上的一个窗口 */
+}
+.page--story    { background: #0B0D0F; }
+
+/* ==========================================================================
+   001 — Word 2003 文档 · 患者诊疗记录
+   一张普通白纸，浮在 Word 蓝灰工作区上，整体居中，宽约 48%
+   ========================================================================== */
+.doc-area {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 26px 0 40px;
+  background: #8FA8C0;                 /* Word 2003 工作区蓝灰 */
+}
+
+.doc-paper {
+  flex: none;
+  width: min(48vw, 560px);
+  min-height: 82vh;
+  background: #FFFFFF;
+  border: 1px solid #B8C2CC;
+  box-shadow: 2px 2px 0 rgba(0,0,0,.18), 6px 6px 14px rgba(0,0,0,.22);
+  padding: 46px 52px 40px;
+  font-family: var(--font-doc);
+  font-size: 13px;
+  line-height: 1.9;
+  color: #1A1D22;
+}
+
+.doc__title {
+  font-family: var(--font-hei);
+  font-size: 19px;
+  text-align: center;
+  letter-spacing: .35em;
+  text-indent: .35em;
+  margin-bottom: 2px;
+}
+.doc__sub {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .25em;
+  color: #6B7078;
+  border-bottom: 1.5px solid #1A1D22;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.doc__line { margin: 0 0 4px; letter-spacing: .04em; }
+.doc__h {
+  font-family: var(--font-hei);
+  font-size: 13.5px;
+  margin: 14px 0 4px;
+  letter-spacing: .1em;
+}
+.doc__p { text-indent: 2em; margin: 0 0 6px; }
+.doc__ol { margin: 0 0 6px; padding-left: 2.4em; }
+.doc__ol li { margin: 1px 0; }
+
+.doc__table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.doc__table td {
+  border-bottom: 1px solid #D8D8D2;
+  padding: 3px 4px;
+}
+.doc__table td.d { width: 74px; color: #55585E; white-space: nowrap; }
+.doc__table td.r { text-align: right; letter-spacing: .2em; color: #3A3E46; }
+
+.doc__doc-sign {
+  margin-top: 22px;
+  text-align: right;
+  color: #2A3B52;
+  letter-spacing: .05em;
+}
+
+/* 阅读完成入口：文档尾部一行低调小字 */
+.doc__next-row {
+  margin-top: 26px;
+  text-align: center;
+  border-top: 1px solid #E2E2DC;
+  padding-top: 12px;
+}
+.doc__next {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: #55585E;
+  cursor: pointer;
+  text-decoration: none;
+}
+.doc__next:hover { color: #A32C26; text-decoration: underline; }
+.doc__next.is-done { color: #A9ADB4; cursor: default; }
+.doc__next.is-done:hover { text-decoration: none; color: #A9ADB4; }
+
+@media (max-width: 760px) {
+  .doc-paper { width: 92vw; padding: 26px 22px 30px; min-height: auto; }
+  .doc-area { padding: 12px 0 30px; }
+}
+
+/* ==========================================================================
+   叙事场景 —— 近黑全屏 · 记忆回放
+   ========================================================================== */
+.story {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 9vh 8vw 12vh;
+  cursor: pointer;
+  user-select: none;
+}
+.story__head {
+  width: min(680px, 100%);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: .3em;
+  color: #565B63;
+  margin-bottom: 7vh;
+}
+.story__body {
+  width: min(680px, 100%);
+  flex: 1;
+  overflow: hidden;
+}
+.story__beat {
+  margin-bottom: 3.2vh;
+  font-size: 15.5px;
+  line-height: 2.15;
+  color: #C9CCD2;
+  animation: beat-in 640ms var(--ease) both;
+}
+@keyframes beat-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.story__beat.is-narr { color: #A9AEB6; }
+.story__beat.is-dial { color: #DFE2E7; }
+.story__beat .who {
+  font-family: var(--font-hei);
+  color: #7FA1C4;
+  margin-right: .9em;
+  font-size: 14px;
+  letter-spacing: .2em;
+}
+.story__beat.is-me .who { color: #B8BEC7; }
+.story__beat .hint-red { color: #B0524C; }
+
+.story__foot {
+  width: min(680px, 100%);
+  text-align: right;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: .4em;
+  color: #565B63;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: .35; } 50% { opacity: .9; } }
+
+/* ==========================================================================
+   002 / 003 / 004 —— 内容页通用容器（旧物件居中在暗环境上）
+   ========================================================================== */
+.ow-page {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ow-scroll {
+  height: min(90vh, 900px);
+  aspect-ratio: 1 / 1.32;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--web-bg);
+  border: 1px solid #3A3E46;
+  box-shadow: var(--shadow-win);
+}
+/* 002 博客 / 003 VV 走固定高度面板；004 浏览器自带 chrome */
+.page--blog .ow-scroll { aspect-ratio: auto; width: min(880px, 94vw); }
+
+/* ==========================================================================
+   档案桌 —— 我收着什么（冷 · 编辑档案感 · 无装饰堆叠）
+   ========================================================================== */
+.desk {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3%;
+  padding: 0 8%;
+}
+
+.desk__paper {
+  flex: none;
+  width: min(400px, 34vw);
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-shadow: var(--shadow-paper);
+  padding: 26px 28px 22px;
+  font-family: var(--font-doc);
+}
+.desk__paper h2 {
+  font-family: var(--font-hei);
+  font-size: 17px;
+  letter-spacing: .5em;
+  border-bottom: 2px solid rgba(34,37,43,.5);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.desk__paper h2 small { font-family: var(--font-ui); font-size: 10px; letter-spacing: .2em; color: var(--paper-ink-2); }
+.desk__row {
+  display: flex;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px dotted rgba(34,37,43,.25);
+  font-size: 13px;
+  align-items: baseline;
+}
+.desk__row dt { flex: none; width: 64px; font-family: var(--font-hei); font-size: 12px; color: var(--paper-ink-2); letter-spacing: .2em; }
+.desk__row dd { flex: 1; }
+.desk__row a { color: var(--doc-blue); text-decoration: underline; cursor: pointer; }
+.desk__row a:hover { color: var(--red); }
+.desk__row .dim { color: var(--paper-ink-3); }
+
+.desk__todo { margin-top: 14px; }
+.desk__todo .t {
+  font-family: var(--font-hei);
+  font-size: 12px;
+  letter-spacing: .3em;
+  color: var(--paper-ink-2);
+  margin-bottom: 6px;
+}
+.desk__todo li {
+  font-size: 12.5px;
+  padding: 4px 0 4px 1.4em;
+  position: relative;
+  color: var(--paper-ink-2);
+}
+.desk__todo li::before {
+  content: "□";
+  position: absolute; left: 0;
+  color: var(--paper-ink-3);
+}
+.desk__todo li.done::before { content: "☑"; }
+.desk__todo li.done { color: var(--paper-ink-3); text-decoration: line-through; }
+
+.desk__stamp { position: absolute; right: 140px; bottom: 16px; }
+
+/* 右侧：索引卡（线索状态） */
+.desk__side {
+  flex: none;
+  width: min(300px, 26vw);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: var(--font-ui);
+}
+.desk__idx {
+  background: #F5F5F1;
+  border: 1px solid #4A505A;
+  box-shadow: var(--shadow-paper);
+  padding: 14px 16px 12px;
+  color: #22252B;
+}
+.desk__idx .k {
+  font-size: 10px;
+  letter-spacing: .3em;
+  color: #8D919A;
+  margin-bottom: 8px;
+}
+.desk__idx .v { font-size: 13px; letter-spacing: .1em; line-height: 1.9; }
+.desk__idx .v b { color: var(--red); font-weight: 400; }
+.desk__idx .v .done { color: #8D919A; text-decoration: line-through; }
+
+.desk__meta {
+  position: fixed;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: .3em;
+  color: #565B63;
+}
+.desk__meta--tl { left: 24px; top: 20px; }
+.desk__meta--br { right: 24px; bottom: 20px; }

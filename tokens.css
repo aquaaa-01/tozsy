@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Design Tokens v3.0 — 唯一真值来源
+   方向：00年代中文互联网 + 学校内部旧系统 + 冷调纸档 + 梦境般的不协调
+   ==========================================================================
+   颜色纪律：
+   - 黑 / 深灰 / 暗红为主；冷蓝做链接与层级；纸张偏冷旧白，禁止暖黄牛皮纸
+   - 红只用于：重点提示 / 标记 / 错误 / 异常 / 手写批注
+   - 蓝只用于：旧网页链接 / 按钮 / 选中 / 信息层级
+   - 功能界面本身就是世界观 —— 不为好看加装饰
+   ========================================================================== */
+
+:root {
+  /* ---------- 底 · 机房暗环境 ---------- */
+  --void-900: #0E1013;
+  --void-800: #13161A;
+  --void-700: #1A1E23;
+  --void-600: #23282E;
+  --void-500: #30363E;
+
+  /* ---------- 冷旧纸（001 病历 / 纸档） ---------- */
+  --paper:      #F3F3EE;   /* 主纸面 · 冷白 */
+  --paper-2:    #EBEBE5;   /* 次纸面 */
+  --paper-3:    #DFDFD8;
+  --paper-line: #CFCFC7;
+  --paper-ink:  #22252B;   /* 纸上墨字 */
+  --paper-ink-2:#555962;
+  --paper-ink-3:#8D919A;
+
+  /* ---------- 旧网页白（浏览器 / 官网 / 论坛 / 博客） ---------- */
+  --web-bg:     #EFEFEA;   /* 页面底 · 灰白 */
+  --web-panel:  #FFFFFF;   /* 内容面板 */
+  --web-panel-2:#F7F7F4;
+  --web-line:   #C7CBD1;   /* 面板边框 */
+  --web-line-2: #DDE0E4;
+  --web-text:   #1C1F25;
+  --web-text-2: #5B5F67;
+  --web-text-3: #94989F;
+
+  /* ---------- 蓝 · 链接与层级 ---------- */
+  --link:         #1F4E8C;  /* 未访问链接 */
+  --link-visited: #551A8B;  /* 已访问 —— 00年代灵魂色 */
+  --link-hover:   #C31E1E;  /* 旧站经典 hover 变红 */
+  --head-blue:    #33567C;  /* 表头 / 窗口标题栏 */
+  --head-blue-2:  #44688F;
+  --sel-blue:     #DCE6F2;  /* 选中行底 */
+
+  /* ---------- 灰蓝 · VV ---------- */
+  --im-bg:     #D7DDE5;
+  --im-panel:  #EEF1F5;
+  --im-border: #A8B1BD;
+  --im-online: #3C9A3C;
+  --im-offline:#9AA1AA;
+
+  /* ---------- 红 · 克制 ---------- */
+  --red:     #A32C26;
+  --red-dim: #B84A44;
+
+  /* ---------- 病历蓝黑 ---------- */
+  --doc-blue: #2A3B52;
+
+  /* ==========================================================================
+     字体系统 —— 00年代中文互联网就是用这些系统字体
+     ========================================================================== */
+  --font-web:  SimSun, "宋体", "NSimSun", "Songti SC", serif;            /* 旧网页正文 · 12px 灵魂 */
+  --font-doc:  "FangSong", "仿宋", "FangSong_GB2312", SimSun, "宋体", serif; /* 病历打印体 */
+  --font-hei:  SimHei, "黑体", "Microsoft YaHei", sans-serif;            /* 黑体标题 */
+  --font-ui:   Tahoma, Verdana, "Microsoft YaHei", "微软雅黑", sans-serif; /* 数字/英文/控件 */
+  --font-mono: Consolas, "Courier New", monospace;
+
+  /* ---------- 字号 ---------- */
+  --fs-web:   13px;   /* 旧网页正文 */
+  --fs-web-s: 12px;   /* 辅助 / 表格 */
+  --fs-web-l: 15px;   /* 帖子标题 / 强调 */
+  --fs-doc:   13.5px; /* 病历正文 */
+
+  /* ---------- 间距 ---------- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-6: 24px; --sp-8: 32px; --sp-12: 48px;
+
+  /* ---------- 阴影（窗口 / 纸 · 冷） ---------- */
+  --shadow-win: 0 1px 0 rgba(255,255,255,.06), 0 12px 36px rgba(0,0,0,.5);
+  --shadow-paper: 0 1px 2px rgba(0,0,0,.14), 0 10px 28px rgba(0,0,0,.22);
+
+  /* ---------- 动效（克制） ---------- */
+  --dur-fast: 140ms;
+  --dur-med:  280ms;
+  --ease: cubic-bezier(.2,.7,.2,1);
+
+  /* ---------- 纹理 ---------- */
+  --tex-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
+
+  /* ---------- z-index ---------- */
+  --z-nav: 8000;
+  --z-crt: 9000;
+}

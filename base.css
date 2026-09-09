@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Base v3.0 — reset / 全局暗环境 / CRT 质感 / 导航 / 图片槽位
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; height: 100%; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-web);
+  font-size: var(--fs-web);
+  line-height: 1.7;
+  color: var(--web-text);
+  background: var(--void-800);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; }
+table { border-collapse: collapse; }
+dl, dd, dt, figure, p, h1, h2, h3, h4 { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+input { font: inherit; }
+
+::selection { background: rgba(51, 86, 124, .28); }
+
+/* ==========================================================================
+   CRT / 旧显示器质感 —— 极轻，是"环境"不是特效
+   ========================================================================== */
+body::before {                                 /* 暗角 */
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: calc(var(--z-crt) - 2);
+  background:
+    radial-gradient(ellipse 130% 105% at 50% 44%,
+      transparent 60%, rgba(0, 0, 0, .22) 100%);
+}
+
+body::after {                                  /* 扫描线 */
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: calc(var(--z-crt) - 1);
+  background: repeating-linear-gradient(0deg,
+    rgba(0, 0, 0, .030) 0 1px, transparent 1px 3px);
+  opacity: .8;
+}
+
+/* ==========================================================================
+   应用根 / 页面舞台
+   ========================================================================== */
+#app {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  display: none;
+  overflow: hidden;
+}
+
+.page.is-active {
+  display: block;
+  animation: page-in var(--dur-med) var(--ease) both;
+}
+
+@keyframes page-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page.is-active { animation: none; }
+  * { transition-duration: 1ms !important; }
+}
+
+/* ==========================================================================
+   底部导航 —— 档案编号式，不是 navbar
+   ========================================================================== */
+.archive-index {
+  position: fixed;
+  left: var(--sp-6);
+  bottom: 14px;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: #878C95;
+  text-shadow: 0 1px 2px rgba(0,0,0,.4);
+  user-select: none;
+}
+
+.archive-index__item {
+  color: inherit;
+  opacity: .42;
+  transition: opacity var(--dur-fast) var(--ease);
+  padding: 2px 0;
+}
+
+.archive-index__item:hover { opacity: .9; }
+
+.archive-index__item.is-active {
+  opacity: 1;
+  border-bottom: 1px solid currentColor;
+}
+
+.archive-index__item.is-locked {
+  opacity: .16;
+  cursor: default;
+  text-decoration: line-through;
+  text-decoration-color: rgba(163,44,38,.5);
+}
+
+.archive-index__item.is-locked:hover { opacity: .3; }
+
+.archive-index__sep { opacity: .3; }
+
+/* 页面在浅色内容上时保证可读（浏览器/官网页） */
+.page--web.is-active ~ .archive-index,
+.archive-index.on-light { color: #4A4E56; text-shadow: 0 1px 1px rgba(255,255,255,.4); }
+
+/* ==========================================================================
+   通用原子
+   ========================================================================== */
+.ow-link {
+  color: var(--link);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ow-link:hover { color: var(--link-hover); }
+.ow-link:visited, .ow-link.is-visited { color: var(--link-visited); }
+
+/* 图片槽位 — 比例锁定，换图零改码 */
+.slot {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-3);
+}
+.slot > img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.slot--placeholder::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(150deg, #D4D6D2 0%, #BFC3BD 55%, #ACB1AB 100%);
+}
+.slot--placeholder::after {
+  content: "";
+  position: absolute; left: 50%; top: 50%;
+  width: 44%; aspect-ratio: 1;
+  transform: translate(-50%,-50%) rotate(45deg);
+  border: 1px solid rgba(40,44,50,.25);
+  background: rgba(255,255,255,.08);
+}
+.slot__caption {
+  font-family: var(--font-web);
+  font-size: var(--fs-web-s);
+  color: var(--web-text-2);
+  margin-top: 6px;
+}

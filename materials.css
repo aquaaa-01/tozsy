@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Materials v3.0 — 冷调纸档 / 印章 / 批注
+   本项目材质极少：纸质档案（001）+ 印章 + 红笔批注。
+   旧网页类 UI（浏览器/论坛/博客/VV）见 oldweb.css。
+   装饰纪律：无胶带 / 无图钉 / 无红线 / 无咖啡渍 / 无手账拼贴。
+   ========================================================================== */
+
+/* ---------- 病历纸 · 冷白 ---------- */
+.paper-doc {
+  position: relative;
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-shadow: var(--shadow-paper);
+}
+
+.paper-doc::before {               /* 极轻纸纹 */
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--tex-grain);
+  pointer-events: none;
+  z-index: 1;
+}
+.paper-doc > * { position: relative; z-index: 2; }
+
+/* 顶部档案色条（冷蓝黑，医院卷宗感） */
+.paper-doc__spine {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 10px;
+  background: linear-gradient(180deg, #2E3B4E, #222D3C);
+  z-index: 3;
+}
+
+/* ---------- 印章 · 单枚 · 克制 ---------- */
+.stamp {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-indent: .22em;
+  color: var(--red);
+  border: 2px solid var(--red);
+  padding: 3px 9px;
+  transform: rotate(-4deg);
+  opacity: .78;
+  border-radius: 2px;
+}
+
+/* ---------- 红笔批注（手写感 · 楷体） ---------- */
+.hand-red {
+  font-family: "KaiTi", "楷体", "STKaiti", serif;
+  color: var(--red);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* 红圈（诊断 · 手画两笔的双椭圆） */
+.ann-circle {
+  position: absolute;
+  left: -2%; top: -14%;
+  width: 104%; height: 128%;
+  pointer-events: none;
+}
+.ann-circle ellipse {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 1.6;
+  opacity: .82;
+}
+
+/* 引线（边注 → 正文） */
+.ann-leader {
+  stroke: var(--red);
+  fill: none;
+  stroke-width: 1.1;
+  opacity: .75;
+}
+
+/* ---------- 复选/表格线通用（病历内） ---------- */
+.doc-rule   { height: 1px; background: rgba(34,37,43,.22); border: 0; }
+.doc-rule-2 { height: 1px; background: rgba(34,37,43,.42); border: 0; }
